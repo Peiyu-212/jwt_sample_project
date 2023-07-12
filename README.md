@@ -11,12 +11,13 @@ docker-compose exec app bash
 python manage.py migrate
 ```
 
+
 ## API
 ### First step: register account
 **POST** /api/users/register
 User need to register account to have authority.
 ```
-[POST] /api/users/register
+[POST] [This link](http://localhost:8002/api/users/register)
 
 [body] 
 {'username': 'rrrrr', 
@@ -51,7 +52,7 @@ User login with username and password to get jwt token
 **POST** /api/token/
 
 ```
-[POST] /api/token/
+[POST]  [This link](http://localhost:8002/api/token/)
 
 [body] 
 {'username': 'rrrr', 
@@ -65,7 +66,7 @@ User login with username and password to get jwt token
 **POST** /api/article/new_post/
 
 ```
-[POST] /api/article/new_post/
+[POST]  [This link](http://localhost:8002/api/article/new_post/)
 
 [body]
 {'title': 'test_post3',
@@ -83,7 +84,7 @@ User login with username and password to get jwt token
 **DELETE** /api/article/{id}/
 
 ```
-[Delete] /api/article/{id}/
+[Delete] [This link](http://localhost:8002/api/article/2/)
 
 [body]
 {'Authorization': 'Bearer jwt token'}
@@ -96,7 +97,8 @@ User login with username and password to get jwt token
 **PATCH** /api/article/{id}/
 
 ```
-[PATCH] /api/article/{id}/
+[PATCH] [This link](http://localhost:8002/api/article/3/)
+
 
 [body]
 {'title': 'test_post3',
@@ -114,7 +116,7 @@ User login with username and password to get jwt token
 **GET** /api/article/
 
 ```
-[GET] /api/article/
+[GET] [This link](http://localhost:8002/api/article/)
 
 [body]
 {'Authorization': 'Bearer jwt token'}
