@@ -17,3 +17,10 @@ class PostImage(models.Model):
     image = models.ImageField(upload_to='files/')
     description = models.TextField(null=True, blank=True)
 
+
+class Comment(models.Model):
+    comment = models.TextField()
+    article =  models.ForeignKey(Article, related_name='comments', on_delete=models.CASCADE)
+    user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='comment_user')
+    created_on = models.DateTimeField(auto_now=True)
+    

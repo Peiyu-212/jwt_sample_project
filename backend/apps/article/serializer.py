@@ -1,6 +1,17 @@
 from rest_framework import serializers
 from .models import Article, PostImage
 
+from django import forms
+from django_summernote.widgets import SummernoteWidget
+
+
+class ArticleForm(forms.ModelForm):
+    content = forms.CharField(widget=SummernoteWidget())
+
+    class Meta:
+        model = Article
+        fields = '__all__'
+        
 
 class ArticleSerializer(serializers.ModelSerializer):
     
@@ -29,9 +40,9 @@ class PosterSerializer(serializers.ModelSerializer):
         fields = ('id', 'title', 'content', 'last_modified', 'images', 'uploaded_images')
         
     def create(self, validated_data):
-        print(validated_data)
         uploaded_data = validated_data.pop('uploaded_images')
         new_article = Article.objects.create(**validated_data, user=self.context['request'].user)
+        print(new_article)
         for uploaded_item in uploaded_data:
             PostImage.objects.create(article=new_article, image=uploaded_item)
         return new_article

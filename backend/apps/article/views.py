@@ -1,15 +1,12 @@
-from django.shortcuts import render
-from django.contrib.auth import login
-from django.contrib.auth.decorators import login_required
-from django.contrib.auth.mixins import LoginRequiredMixin
-from rest_framework import serializers, status, viewsets
+from django.views.generic.base import TemplateView
+from rest_framework import status, viewsets
 from rest_framework.parsers import MultiPartParser
 from rest_framework.decorators import action
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
 
-from .models import Article, PostImage
-from .serializer import ArticleSerializer, PosterSerializer
+from .models import Article
+from .serializer import PosterSerializer
 # Create your views here.
 
 
@@ -21,11 +18,6 @@ class ArticleViewSet(viewsets.ModelViewSet):
 
     def get_queryset(self):
         return self.queryset.filter(user=self.request.user)
-
-    def get_serializer_class(self):
-        if self.action == 'new_post':
-            return PosterSerializer
-        return super().get_serializer_class()
     
     @action(detail=False, methods=['post'])
     def new_post(self, request):
@@ -34,3 +26,5 @@ class ArticleViewSet(viewsets.ModelViewSet):
         serializers.save()
         return Response(serializers.data, status=status.HTTP_201_CREATED)
     
+class ArticleView(TemplateView):
+    template_name = "article.html"

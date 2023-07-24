@@ -45,21 +45,21 @@ services:
     networks:
       - internal
   db:
-    image: postgres:13
+    image: postgres:12
     restart: always
     container_name: ${DOCKER_DB_CONTAINER}
+    networks:
+      - internal
     volumes:
       - ./db/postgresql:/var/lib/postgresql/data/
     ports:
-      - "${DOCKER_DB_PORT}:${DOCKER_DB_INNER_PORT}"
+      - "7777:5432"
     environment:
       POSTGRES_USER: ${DOCKER_DB_USER}
       POSTGRES_PASSWORD: ${DOCKER_DB_PASSWORD}
       POSTGRES_DB: ${DOCKER_DB_DATABASE}
     env_file: ./.env
-    networks:
-      - internal
-
+    
 networks:
   internal:
     name: jwt_sample

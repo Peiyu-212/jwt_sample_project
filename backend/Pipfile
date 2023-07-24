@@ -6,11 +6,12 @@ name = "pypi"
 [packages]
 django = "==3.2.19"
 djangorestframework = "*"
-psycopg2-binary = "==2.8.4"
 uwsgi = "==2.0.19.1"
 djangorestframework-simplejwt = "*"
 django-environ = "==0.9.0"
-pillow = "*"
+pillow = "==9.5.0"
+django-summernote = "*"
+psycopg2-binary = "*"
 
 [dev-packages]
 
